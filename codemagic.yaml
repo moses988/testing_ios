@@ -14,7 +14,7 @@
       #  -exportOptionsPlist ExportOptions.plist \
        # -exportPath $CM_BUILD_DIR/build
 
-       workflows:
+workflows:
   unzip-and-build:
     name: Unzip and Build IPA
     environment:
@@ -36,5 +36,4 @@
             -exportPath $CM_BUILD_DIR/build
     artifacts:
       - build/*.ipa
-
-
+    
