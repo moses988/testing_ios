@@ -22,14 +22,15 @@ workflows:
     scripts:
       - name: Debug — list files in repo
         script: |
-          echo "Current directory:"
-          pwd
-          echo "Files:"
+          echo "Files in root:"
           ls -lah
-          
-      - name: Unzip iOS project
-        script: |
+          echo "Unzipping..."
           unzip ios-project.zip -d ios
+          echo "Files after unzip:"
+          ls -R ios
+
+      - name: Build IPA
+        script: |
           cd ios/App
           xcodebuild -workspace App.xcworkspace \
             -scheme App \
