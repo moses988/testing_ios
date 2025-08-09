@@ -20,9 +20,13 @@ workflows:
     environment:
       xcode: latest
     scripts:
-      - name: Debug file list
+      - name: Debug — list files in repo
         script: |
+          echo "Current directory:"
+          pwd
+          echo "Files:"
           ls -lah
+          
       - name: Unzip iOS project
         script: |
           unzip ios-project.zip -d ios
@@ -39,4 +43,3 @@ workflows:
             -exportPath $CM_BUILD_DIR/build
     artifacts:
       - build/*.ipa
-
