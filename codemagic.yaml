@@ -1,16 +1,40 @@
-scripts:
-  - name: Unzip iOS project
-    script: |
-      unzip ios-project.zip -d ios
-      cd ios/App
-      xcodebuild -workspace App.xcworkspace \
-        -scheme App \
-        -sdk iphoneos \
-        -configuration Release \
-        -archivePath $CM_BUILD_DIR/App.xcarchive archive
+#scripts:
+ # - name: Unzip iOS project
+  #  script: |
+   #   unzip ios-project.zip -d ios
+    #  cd ios/App
+     # xcodebuild -workspace App.xcworkspace \
+      #  -scheme App \
+       # -sdk iphoneos \
+        #-configuration Release \
+        #-archivePath $CM_BUILD_DIR/App.xcarchive archive
 
-      xcodebuild -exportArchive \
-        -archivePath $CM_BUILD_DIR/App.xcarchive \
-        -exportOptionsPlist ExportOptions.plist \
-        -exportPath $CM_BUILD_DIR/build
+    #  xcodebuild -exportArchive \
+     #   -archivePath $CM_BUILD_DIR/App.xcarchive \
+      #  -exportOptionsPlist ExportOptions.plist \
+       # -exportPath $CM_BUILD_DIR/build
+
+       workflows:
+  unzip-and-build:
+    name: Unzip and Build IPA
+    environment:
+      xcode: latest
+    scripts:
+      - name: Unzip iOS project
+        script: |
+          unzip ios-project.zip -d ios
+          cd ios/App
+          xcodebuild -workspace App.xcworkspace \
+            -scheme App \
+            -sdk iphoneos \
+            -configuration Release \
+            -archivePath $CM_BUILD_DIR/App.xcarchive archive
+
+          xcodebuild -exportArchive \
+            -archivePath $CM_BUILD_DIR/App.xcarchive \
+            -exportOptionsPlist ExportOptions.plist \
+            -exportPath $CM_BUILD_DIR/build
+    artifacts:
+      - build/*.ipa
+
 
